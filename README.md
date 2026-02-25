@@ -19,7 +19,7 @@
 
 </p>
 
-*OpenSigner is currenlty being audited by Quantstamp*
+*OpenSigner is currently being audited by Quantstamp*
 
 ## About the Project
 
@@ -92,7 +92,7 @@ it can be invoked via
 docker-compose -f docker-compose.yml -f docker-compose.map.db.ports.yml up --build
 ```
 
-For the full reference, check out [`docker-compose.yml`](/openfort-xyz/opensigner/blob/main/docker-compose.yml).
+For the full reference, check out [`docker-compose.yml`](docker-compose.yml).
 
 ## License
 
