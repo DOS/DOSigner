@@ -17,7 +17,6 @@ const (
 	authProviderDefault = "default"
 	authProviderGoogle  = "google"
 	authProviderPlayFab = "playfab"
-	authProviderCustom  = "custom"
 
 	authProviderGoogleUrl = "https://www.googleapis.com/oauth2/v3/certs"
 )
@@ -60,11 +59,6 @@ func validateThirdPartyAuth(token string, authProvider string) (string, error) {
 	switch authProvider {
 	case authProviderGoogle:
 		return validate(token, authProviderGoogleUrl)
-	case authProviderCustom:
-		if customJWTJWKURL == "" {
-			return "", errors.New("CUSTOM_JWT_JWK_URL not configured")
-		}
-		return validate(token, customJWTJWKURL)
 	case authProviderPlayFab:
 		return "", errors.New("playfab third party authentication is unimplemented")
 	default:

@@ -53,10 +53,6 @@ func isOriginAllowed(origin string, allowed []string) bool {
 // Without rate limiting, authenticated users can create unbounded devices/accounts.
 func authMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/health" {
-			next.ServeHTTP(w, r)
-			return
-		}
 		userId, authProvider, err := validateAuth(r)
 		if err != nil || userId == "" {
 			unauthorized(w)
