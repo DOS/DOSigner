@@ -45,10 +45,13 @@ services:
   iframe:
     container_name: iframe
     volumes:
-      - ./iframe/iframe_nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./iframe/iframe_nginx.conf:/etc/nginx/templates/default.conf.template
     image: ghcr.io/openfort-xyz/iframe:latest
+    entrypoint: ["/bin/sh", "-c", "envsubst '$$IFRAME_ALLOWED_ORIGINS $$IFRAME_BACKEND_API' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
     environment:
       PORT: ${IFRAME_CONTAINER_PORT:-5173}
+      IFRAME_ALLOWED_ORIGINS: ${IFRAME_ALLOWED_ORIGINS:-http://localhost:7050 http://localhost:7051}
+      IFRAME_BACKEND_API: ${IFRAME_BACKEND_API:-http://localhost:7053 http://localhost:7054}
     networks:
       - db_network
     expose:
